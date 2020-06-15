@@ -130,18 +130,13 @@ def plot_value_array(i, predictions_array, true_label):
 # plt.show()
 
 # An alternative way to check one image
-img = test_images[1]
-
-print(img.shape)
-
-predictions_single = model.predict(img)
-
-print(predictions_single)
-
-plot_value_array(0, predictions_single, test_labels)
-_ = plt.xticks(range(10), class_names, rotation=45)
-
-np.argmax(predictions_single[0])
+# img = test_images[1]
+# print(img.shape)
+# predictions_single = model.predict(img)
+# print(predictions_single)
+# plot_value_array(0, predictions_single, test_labels)
+# _ = plt.xticks(range(10), class_names, rotation=45)
+# np.argmax(predictions_single[0])
 
 
 
