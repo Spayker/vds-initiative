@@ -4,7 +4,7 @@ Virtual design studio concept has a focus to solve next questions:
 1) select suitable design for certain room in flat/house   
 2) define cost/price for each component on generated design
 
-Trello board: 
+Trello board: https://trello.com/b/v7yL7thG/vds-initiative
 
 ## Description
 not yet ready
