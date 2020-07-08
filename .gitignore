@@ -4,3 +4,17 @@ graphs
 venv
 data
 server.log
+
+
+.idea
+*.iml
+account-auth/*.iml
+account-auth/target
+config/*.iml
+account-gateway/*.iml
+account-gateway/target
+registry/*.iml
+account-service/*.iml
+account-service/target
+config/target
+registry/target

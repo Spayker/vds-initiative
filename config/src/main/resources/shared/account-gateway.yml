@@ -1,0 +1,39 @@
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 320000
+
+ribbon:
+  ReadTimeout: 320000
+  ConnectTimeout: 320000
+
+zuul:
+  ignoredServices: '*'
+  host:
+    connect-timeout-millis: 320000
+    socket-timeout-millis: 320000
+
+  routes:
+    account-auth:
+      path: /mservicet/**
+      url: http://account-auth:${ACCOUNT_AUTH_DEV_PORT}
+      stripPrefix: false
+      sensitiveHeaders:
+
+    account-service:
+      path: /accounts/**
+      serviceId: account-service
+      stripPrefix: false
+      sensitiveHeaders:
+
+    account-service-2:
+      path: /accounts/trainings/**
+      serviceId: account-service
+      stripPrefix: false
+      sensitiveHeaders:
+
+server:
+  port: ${ACCOUNT_GATEWAY_DEV_PORT}

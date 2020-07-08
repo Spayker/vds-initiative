@@ -1,0 +1,143 @@
+version: '3.7'
+services:
+
+  config:
+    environment:
+      CONFIG_SERVICE_PASSWORD:             $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_DEV_PORT:             $CONFIG_SERVICE_DEV_PORT
+      ACCOUNT_AUTH_DEV_PORT:               $ACCOUNT_AUTH_DEV_PORT
+      ACCOUNT_GATEWAY_DEV_PORT:            $ACCOUNT_GATEWAY_DEV_PORT
+      CONSUMER_AUTH_DEV_PORT:              $CONSUMER_AUTH_DEV_PORT
+      CONSUMER_GATEWAY_DEV_PORT:           $CONSUMER_GATEWAY_DEV_PORT
+      REGISTRY_SERVICE_DEV_PORT:           $REGISTRY_SERVICE_DEV_PORT
+    image: mservicet-config
+    restart: on-failure
+    healthcheck:
+      test: ["CMD", "bash", "-c", "sleep 15; exit 0"]
+      interval: 30s
+      timeout: 10s
+      retries: 7
+      start_period: 10s
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  registry:
+    environment:
+      CONFIG_SERVICE_PASSWORD:    $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_DEV_PORT:    $CONFIG_SERVICE_DEV_PORT
+      REGISTRY_SERVICE_DEV_PORT:  $REGISTRY_SERVICE_DEV_PORT
+    image: mservicet-registry
+    restart: on-failure
+    depends_on:
+      - config
+    healthcheck:
+      test: ["CMD", "curl", $CONFIG_SERVER_HEALTH_CHECK_URL]
+      interval: 30s
+      timeout: 10s
+      retries: 7
+      start_period: 1s
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  account-gateway:
+    environment:
+      CONFIG_SERVICE_PASSWORD:    $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_DEV_PORT:    $CONFIG_SERVICE_DEV_PORT
+      REGISTRY_SERVICE_DEV_PORT:  $REGISTRY_SERVICE_DEV_PORT
+      ACCOUNT_AUTH_DEV_PORT:      $ACCOUNT_AUTH_DEV_PORT
+      ACCOUNT_GATEWAY_DEV_PORT:   $ACCOUNT_GATEWAY_DEV_PORT
+    image: mservicet-account-gateway
+    restart: on-failure
+    depends_on:
+      - config
+    healthcheck:
+      test: ["CMD", "curl", $CONFIG_SERVER_HEALTH_CHECK_URL]
+      interval: 30s
+      timeout: 10s
+      retries: 7
+      start_period: 1s
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  account-auth:
+    environment:
+      CONFIG_SERVICE_PASSWORD:              $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_DEV_PORT:              $CONFIG_SERVICE_DEV_PORT
+      REGISTRY_SERVICE_DEV_PORT:            $REGISTRY_SERVICE_DEV_PORT
+      ACCOUNT_SERVICE_PASSWORD:             $ACCOUNT_SERVICE_PASSWORD
+      ACCOUNT_AUTH_DEV_PORT:                $ACCOUNT_AUTH_DEV_PORT
+      MYSQLDB_PASSWORD:                     $MYSQLDB_PASSWORD
+      MYSQLDB_SERVICE_INTERNAL_DEV_PORT:    $MYSQLDB_SERVICE_INTERNAL_DEV_PORT
+    image: mservicet-account-auth
+    restart: on-failure
+    depends_on:
+      - config
+    healthcheck:
+      test: ["CMD", "curl", $CONFIG_SERVER_HEALTH_CHECK_URL]
+      interval: 30s
+      timeout: 10s
+      retries: 7
+      start_period: 1s
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  account-auth-mysqld:
+    image: mservicet-account-auth-mysqld
+    environment:
+      MYSQL_DATABASE: spring_social
+      MYSQL_ROOT_PASSWORD: qwerty
+    restart: on-failure
+
+  account-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD:              $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_DEV_PORT:              $CONFIG_SERVICE_DEV_PORT
+      ACCOUNT_SERVICE_PASSWORD:             $ACCOUNT_SERVICE_PASSWORD
+      MYSQLDB_PASSWORD:                     $MYSQLDB_PASSWORD
+      ACCOUNT_SERVICE_DEV_PORT:             $ACCOUNT_SERVICE_DEV_PORT
+      ACCOUNT_AUTH_DEV_PORT:                $ACCOUNT_AUTH_DEV_PORT
+      MYSQLDB_SERVICE_INTERNAL_DEV_PORT:    $MYSQLDB_SERVICE_INTERNAL_DEV_PORT
+      REGISTRY_SERVICE_DEV_PORT:            $REGISTRY_SERVICE_DEV_PORT
+    image: mservicet-account-service
+    restart: on-failure
+    depends_on:
+      - config
+    healthcheck:
+      test: ["CMD", "curl", $CONFIG_SERVER_HEALTH_CHECK_URL]
+      interval: 30s
+      timeout: 10s
+      retries: 7
+      start_period: 1s
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  training-mysqld:
+    environment:
+      MYSQL_DATABASE: trainingDB
+      MYSQL_ROOT_PASSWORD: qwerty
+    image: mservicet-mysqld
+    restart: on-failure
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: on-failure
+    ports:
+      - $RABBITMQ_SERVICE_INTERNAL_PROD_PORT:$RABBITMQ_SERVICE_INTERNAL_PROD_PORT
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"

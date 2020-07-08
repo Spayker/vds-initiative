@@ -1,0 +1,14 @@
+logging:
+  level:
+    org.springframework.security: INFO
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    serviceUrl:
+      defaultZone: http://registry:${REGISTRY_SERVICE_DEV_PORT}/eureka/
+
+spring:
+  rabbitmq:
+    host: rabbitmq
