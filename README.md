@@ -17,3 +17,6 @@ Not yet ready
 
 ## Testing
 Not yet ready
+
+## License
+MIT
