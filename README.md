@@ -1,3 +1,5 @@
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/Spayker/vds-initiative/blob/master/LICENSE)
+
 # VDS initiative
 
 Virtual design studio concept has a focus to solve next questions:
