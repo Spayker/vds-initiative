@@ -1,6 +1,5 @@
 package com.vds.account.repository;
 
-import com.vds.account.domain.Account;
 import com.vds.account.util.factory.AccountFactory;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;

@@ -1,7 +1,5 @@
 package com.vds.account.util.factory;
 
-import com.vds.account.domain.Account;
-import com.vds.account.domain.Gender;
 import org.apache.commons.lang.RandomStringUtils;
 
 import java.util.Date;

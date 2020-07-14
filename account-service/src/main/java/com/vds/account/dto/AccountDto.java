@@ -1,6 +1,5 @@
 package com.vds.account.dto;
 
-import com.vds.account.domain.Gender;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -8,6 +7,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ *  Simple DTO that was created to map controller incoming data from model layer.
+ **/
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -21,19 +23,5 @@ public class AccountDto {
     private String email;
 
     private String password;
-
-    private Date createdDate;
-
-    private Date modifiedDate;
-
-    private int age;
-
-    private Gender gender;
-
-    private int weight;
-
-    private int height;
-
-
 
 }

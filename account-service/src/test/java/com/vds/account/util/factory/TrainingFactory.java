@@ -1,8 +1,5 @@
 package com.vds.account.util.factory;
 
-import com.vds.account.domain.Account;
-import com.vds.account.domain.Training;
-
 import java.util.Date;
 
 public class TrainingFactory {

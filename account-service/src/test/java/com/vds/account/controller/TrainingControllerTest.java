@@ -2,8 +2,6 @@ package com.vds.account.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vds.account.domain.Training;
-import com.vds.account.service.TrainingService;
 import com.vds.account.util.factory.AccountFactory;
 import com.vds.account.util.factory.TrainingFactory;
 import org.junit.jupiter.api.BeforeEach;

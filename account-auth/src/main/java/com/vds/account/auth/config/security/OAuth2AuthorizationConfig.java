@@ -1,6 +1,6 @@
 package com.vds.account.auth.config.security;
 
-import com.vds.account.auth.service.security.B2GUserDetailsService;
+import com.vds.account.auth.service.security.VDSUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +26,7 @@ public class OAuth2AuthorizationConfig extends AuthorizationServerConfigurerAdap
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private B2GUserDetailsService userDetailsService;
+    private VDSUserDetailsService userDetailsService;
 
     @Autowired
     private Environment env;
