@@ -6,7 +6,9 @@ import com.vds.account.dto.AccountDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
-
+/**
+ *  Mapstruct interface to perform mapping of incoming DTOs in controller layer into Account model entity.
+ **/
 @Mapper(componentModel = "spring",
         unmappedSourcePolicy = ReportingPolicy.IGNORE,
         unmappedTargetPolicy = ReportingPolicy.IGNORE)

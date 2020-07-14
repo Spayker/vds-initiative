@@ -1,7 +1,6 @@
 package com.vds.account.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.vds.account.domain.Account;
 import com.vds.account.service.AccountService;
 import com.vds.account.util.factory.AccountFactory;
 import com.sun.security.auth.UserPrincipal;

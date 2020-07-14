@@ -1,7 +1,5 @@
 package com.vds.account.repository;
 
-import com.vds.account.domain.Account;
-import com.vds.account.domain.Training;
 import com.vds.account.util.factory.AccountFactory;
 import com.vds.account.util.factory.TrainingFactory;
 import org.junit.jupiter.api.AfterEach;

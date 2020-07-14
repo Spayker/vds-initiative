@@ -1,8 +1,6 @@
 package com.vds.account.service;
 
 import com.vds.account.client.AuthServiceClient;
-import com.vds.account.domain.Account;
-import com.vds.account.domain.User;
 import com.vds.account.dto.mapper.AccountMapper;
 import com.vds.account.repository.AccountRepository;
 import com.vds.account.util.factory.AccountFactory;
