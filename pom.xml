@@ -44,9 +44,6 @@
         <module>account-auth</module>
         <module>account-gateway</module>
         <module>account-service</module>
-        <module>consumer-auth</module>
-        <module>consumer-gateway</module>
-        <module>consumer-service</module>
     </modules>
 
 </project>
