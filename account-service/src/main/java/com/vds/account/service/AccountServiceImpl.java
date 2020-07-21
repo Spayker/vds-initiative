@@ -3,37 +3,41 @@ package com.vds.account.service;
 import com.vds.account.client.AuthServiceClient;
 import com.vds.account.domain.Account;
 import com.vds.account.domain.User;
+import com.vds.account.exception.AccountException;
 import com.vds.account.repository.AccountRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Date;
 import java.util.Optional;
 
+/**
+ *  Service layer implementation to work with Account entities.
+ **/
 @Service
 public class AccountServiceImpl implements AccountService {
 
 	private final Logger log = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	private AccountRepository repository;
+	private AuthServiceClient authClient;
 
 	@Autowired
-	private AuthServiceClient authClient;
+	private AccountRepository repository;
 
 	/**
 	 *  Looks for stored account by its name.
-	 *  @param name - string value for search
+	 *  @param accountName - string value for search
 	 *  @return found Account
 	 **/
 	@Override
-	public List<Account> findAccountByName(String name) {
-		if(name.isEmpty() || name.isBlank()){
-			throw new IllegalArgumentException("provided name is empty or blank");
+	public Account findByName(String accountName) {
+		if(accountName.length() == 0){
+			throw new IllegalArgumentException("provided accountName has 0 String length");
 		}
-		return repository.findByName(name);
+		return repository.findByName(accountName);
 	}
 
 	/**
@@ -42,47 +46,52 @@ public class AccountServiceImpl implements AccountService {
 	 *  @return found Account
 	 **/
 	@Override
-	public Account findAccountById(String accountId) {
-		if(accountId.isEmpty() || accountId.isBlank()){
+	public Account findById(String accountId) {
+		if(accountId.length() == 0){
 			throw new IllegalArgumentException("provided accountId has 0 String length");
 		}
-		Optional<Account> foundAccount = repository.findById(Long.valueOf(accountId));
+		Optional<Account> foundAccount = repository.findById(accountId);
 		return foundAccount.orElse(null);
 	}
 
+	/**
+	 *  Creates new Account and returns it by provided User instance.
+	 *  @param user - instance of User with email and password
+	 *  @return created Account
+	 **/
 	@Override
-	public Account findAccountByEmail(String email) {
-		/*if(email.isEmpty() || email.isBlank()){
-			throw new IllegalArgumentException("provided email is empty or blank");
-		}
-		return repository.findByEmail(email);*/
-		return null;
-	}
-
-	@Override
-	public Account create(Account account, User user) {
-		/*Account existing = repository.findByEmail(account.getEmail());
+	public Account create(User user) {
+		Account existing = repository.findByName(user.getUsername());
 		if(existing == null){
 			authClient.createUser(user);
-			Account savedAccount = repository.saveAndFlush(account);
-			log.info("new account has been created: " + savedAccount.getEmail());
-			return savedAccount;
+			Account account = Account.builder()
+					.name(user.getUsername())
+					.lastSeen(new Date())
+					.build();
+
+			repository.save(account);
+			log.info("new account has been created: " + account.getName());
+			return account;
 		} else {
-			throw new AccountException("account already exists: " + account.getEmail());
-		}*/
-		return null;
+			throw new AccountException("account already exists: " + user.getUsername());
+		}
 	}
 
+	/**
+	 *  Updates a stored account and returns its updated variant.
+	 *  @param name - String value to search a target account for update
+	 *  @param update - an updated variation of Account that must be persisted
+	 **/
 	@Override
-	public Account saveChanges(Account update) {
-		/*Account account = repository.findByEmail(update.getEmail());
+	public void saveChanges(String name, Account update) {
+		Account account = repository.findByName(name);
 		if(account == null){
-			throw new AccountException("can't find account with email " + update.getEmail());
+			throw new AccountException("can't find account with name " + name);
 		} else {
-			update.setModifiedDate(new Date());
-			log.debug("account {} changes have been saved", update.getEmail());
-			return repository.saveAndFlush(update);
-		}*/
-		return null;
+			account.setLastSeen(new Date());
+			account.setDeviceIds(update.getDeviceIds());
+			repository.save(account);
+			log.debug("account {} changes has been saved", name);
+		}
 	}
 }
