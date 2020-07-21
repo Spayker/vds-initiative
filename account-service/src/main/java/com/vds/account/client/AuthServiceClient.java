@@ -1,5 +1,6 @@
 package com.vds.account.client;
 
+import com.vds.account.domain.User;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
