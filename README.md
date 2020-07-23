@@ -9,7 +9,9 @@ Virtual design studio concept has a focus to solve next questions:
 Trello board: https://trello.com/b/v7yL7thG/vds-initiative
 
 ## Description
-not yet ready
+Current server's concept approximately looks: 
+
+![alt text](resources/diagrams/vds_server_architecture_mk1.jpg)
 
 ## Technical Stack
 not yet ready
