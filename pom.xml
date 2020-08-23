@@ -44,6 +44,7 @@
         <module>account-auth</module>
         <module>account-gateway</module>
         <module>account-service</module>
+        <module>trainer-service</module>
     </modules>
 
 </project>

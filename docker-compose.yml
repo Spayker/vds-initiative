@@ -130,6 +130,31 @@ services:
         max-size: "10m"
         max-file: "10"
 
+  trainer-service:
+    environment:
+      CONFIG_SERVICE_PASSWORD:              $CONFIG_SERVICE_PASSWORD
+      CONFIG_SERVICE_DEV_PORT:              $CONFIG_SERVICE_DEV_PORT
+      TRAINER_SERVICE_PASSWORD:             $TRAINER_SERVICE_PASSWORD
+      MYSQLDB_PASSWORD:                     $MYSQLDB_PASSWORD
+      TRAINER_SERVICE_DEV_PORT:             $TRAINER_SERVICE_DEV_PORT
+      TRAINER_AUTH_DEV_PORT:                $TRAINER_AUTH_DEV_PORT
+      MYSQLDB_SERVICE_INTERNAL_DEV_PORT:    $MYSQLDB_SERVICE_INTERNAL_DEV_PORT
+      REGISTRY_SERVICE_DEV_PORT:            $REGISTRY_SERVICE_DEV_PORT
+    image: mservicet-trainer-service
+    restart: on-failure
+    depends_on:
+      - config
+    healthcheck:
+      test: ["CMD", "curl", $CONFIG_SERVER_HEALTH_CHECK_URL]
+      interval: 30s
+      timeout: 10s
+      retries: 7
+      start_period: 1s
+    logging:
+      options:
+        max-size: "10m"
+        max-file: "10"
+
   rabbitmq:
     image: rabbitmq:3-management
     restart: on-failure
