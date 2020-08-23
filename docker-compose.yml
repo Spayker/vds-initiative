@@ -7,8 +7,6 @@ services:
       CONFIG_SERVICE_DEV_PORT:             $CONFIG_SERVICE_DEV_PORT
       ACCOUNT_AUTH_DEV_PORT:               $ACCOUNT_AUTH_DEV_PORT
       ACCOUNT_GATEWAY_DEV_PORT:            $ACCOUNT_GATEWAY_DEV_PORT
-      CONSUMER_AUTH_DEV_PORT:              $CONSUMER_AUTH_DEV_PORT
-      CONSUMER_GATEWAY_DEV_PORT:           $CONSUMER_GATEWAY_DEV_PORT
       REGISTRY_SERVICE_DEV_PORT:           $REGISTRY_SERVICE_DEV_PORT
     image: mservicet-config
     restart: on-failure
@@ -121,9 +119,9 @@ services:
         max-size: "10m"
         max-file: "10"
 
-  training-mysqld:
+  account-mysqld:
     environment:
-      MYSQL_DATABASE: trainingDB
+      MYSQL_DATABASE: accountDB
       MYSQL_ROOT_PASSWORD: qwerty
     image: mservicet-mysqld
     restart: on-failure
