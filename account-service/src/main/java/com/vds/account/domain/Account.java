@@ -8,20 +8,25 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
-import java.util.List;
 
+/**
+ *  Account model entity that contains major information about account.
+ **/
+@Document(collection = "accounts")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @Data
-@Document(collection = "accounts")
 public class Account {
 
-	@Id
+
 	private String name;
 
-	private Date lastSeen;
+	@Id
+	private String email;
 
-	private List<String> deviceIds;
+	private Date createdDate;
+
+	private Date modifiedDate;
 
 }
