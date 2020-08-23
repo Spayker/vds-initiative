@@ -22,7 +22,7 @@ import static org.mockito.MockitoAnnotations.initMocks;
 
 public class AccountServiceTest {
 
-	@InjectMocks
+	/*@InjectMocks
 	private AccountServiceImpl accountService;
 
 	@Mock
@@ -94,5 +94,5 @@ public class AccountServiceTest {
 
 		when(accountService.findByName("test")).thenReturn(null);
 		accountService.saveChanges("test", update);
-	}
+	}*/
 }
