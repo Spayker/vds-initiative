@@ -52,26 +52,6 @@ public class AccountServiceImpl implements AccountService {
 	public List<Account> findAccountByModifiedDate(Date modifiedDate) { return repository.findByModifiedDate(modifiedDate); }
 
 	@Override
-	public List<Account> findAccountByAge(int age) {
-		return repository.findByAge(age);
-	}
-
-	@Override
-	public List<Account> findAccountByGender(int gender) {
-		return repository.findByGender(gender);
-	}
-
-	@Override
-	public List<Account> findAccountByWeight(int weight) {
-		return repository.findByWeight(weight);
-	}
-
-	@Override
-	public List<Account> findAccountByHeight(int height) {
-		return repository.findByHeight(height);
-	}
-
-	@Override
 	public Account create(Account account, User user) {
 		Account existing = repository.findByEmail(account.getEmail());
 		if(existing == null){

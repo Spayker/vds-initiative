@@ -21,12 +21,4 @@ public interface AccountRepository extends MongoRepository<Account, String> {
 
 	List<Account> findByModifiedDate(Date modifiedDate);
 
-	List<Account> findByAge(int age);
-
-	List<Account> findByGender(int gender);
-
-	List<Account> findByWeight(int weight);
-
-	List<Account> findByHeight(int height);
-
 }

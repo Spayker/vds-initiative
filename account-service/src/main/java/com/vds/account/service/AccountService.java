@@ -40,34 +40,6 @@ public interface AccountService {
 	List<Account> findAccountByModifiedDate(Date modifiedDate);
 
 	/**
-	 *  Looks for stored account by its modified age
-	 *  @param age - string value for search
-	 *  @return list of found accounts
-	 **/
-	List<Account> findAccountByAge(int age);
-
-	/**
-	 *  Looks for stored account by its gender
-	 *  @param gender - string value for search
-	 *  @return list of found accounts
-	 **/
-	List<Account> findAccountByGender(int gender);
-
-	/**
-	 *  Looks for stored account by its weight
-	 *  @param weight - string value for search
-	 *  @return list of found accounts
-	 **/
-	List<Account> findAccountByWeight(int weight);
-
-	/**
-	 *  Looks for stored account by its height
-	 *  @param height - string value for search
-	 *  @return list of found accounts
-	 **/
-	List<Account> findAccountByHeight(int height);
-
-	/**
 	 *  Creates new Account and returns it by provided User instance.
 	 *  @param user - instance of User with email and password
 	 *  @return created Account
