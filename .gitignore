@@ -6,7 +6,6 @@ data
 server.log
 
 
-.idea
 .run
 *.iml
 account-auth/*.iml
