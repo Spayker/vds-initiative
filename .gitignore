@@ -18,3 +18,5 @@ account-service/*.iml
 account-service/target
 config/target
 registry/target
+trainer-service/*.iml
+trainer-service/target
