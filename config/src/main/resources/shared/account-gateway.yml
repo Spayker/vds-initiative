@@ -29,9 +29,9 @@ zuul:
       stripPrefix: false
       sensitiveHeaders:
 
-    account-service-2:
-      path: /accounts/trainings/**
-      serviceId: account-service
+    trainer-service:
+      path: /trainings/**
+      serviceId: trainer-service
       stripPrefix: false
       sensitiveHeaders:
 
