@@ -1,12 +1,12 @@
 {
 	"info": {
 		"_postman_id": "e6ada19c-6ab6-4c7a-89da-28bce28b5333",
-		"name": "SpikeBoost",
+		"name": "VDS",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "SB account: create new account",
+			"name": "VDS account: create new account",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -35,7 +35,7 @@
 			"response": []
 		},
 		{
-			"name": "SB auth: get account token",
+			"name": "VDS auth: get account token",
 			"request": {
 				"method": "POST",
 				"header": [
